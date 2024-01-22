@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiral Animation</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #222; /* Set a background color for better visibility */
+        }
+
+        .spiral-container {
+            text-align: center;
+        }
+
+        .spiral-name {
+            font-family: 'Arial', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        .spiralContainer {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            margin: 20px;
+            transition: background-color 0.5s ease; /* Added transition for color change */
+            cursor: pointer;
+            position: relative;
+            animation: spin 3s linear 0s infinite reverse;
+            animation-play-state: paused;
+        }
+
+        .spiral {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-image: url(http://farm7.staticflickr.com/6115/6319704650_0a2bd0dcef_o.jpg);
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            animation: spin 6s linear 0s infinite normal;
+        }
+
+        .spiralContainer:hover {
+            animation-play-state: running;
+            background-color: #ff3366; /* Change this to your desired hover color */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="spiral-container">
+        <div class="spiral-name">Spiral</div>
+        <div class="spiralContainer">
+            <div class="spiral"></div>
+        </div>
+    </div>
+</body>
+</html>

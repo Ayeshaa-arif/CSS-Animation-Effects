@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Lure perfume</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .scroll-wrap {
+            position: relative;
+        }
+        
+        .scroll-wrap li {
+            height: 100vh;
+        }
+        
+        .movie {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            background: #111;
+        }
+        
+        .movie .bg {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .movie .bg img {
+            transition: 1s;
+        }
+        
+        .movie.step-2 .bg img {
+            transform: scale(0.9);
+        }
+        
+        .movie.step-3 .bg img {
+            transform: scale(0.8);
+        }
+        
+        .story,
+        .actor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            opacity: 0;
+            transition: 1s;
+        }
+        
+        .story:before,
+        .actor:before {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            vertical-align: bottom;
+        }
+        
+        .story-content,
+        .actor ul {
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 10%;
+            width: 600px;
+            transform: scale(2);
+            transition: 1s;
+        }
+        
+        .actor ul {
+            margin-bottom: 20%;
+        }
+        
+        .actor ul li {
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+        .actor ul li + li {
+            margin-left: 40px;
+        }
+        
+        .movie.step-2 .story,
+        .movie.step-3 .story {
+            opacity: 1;
+        }
+        
+        .movie.step-2 .story-content {
+            transform: scale(1);
+        }
+        
+        .movie.step-3 .story-content {
+            transform: scale(0.5);
+        }
+        
+        .movie.step-3 .actor {
+            opacity: 1;
+        }
+        
+        .movie.step-3 .actor ul {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="movie">
+        <div class="bg"><img src="https://images.pexels.com/photos/16198426/pexels-photo-16198426/free-photo-of-perfume-vial-and-plant-in-decorative-vase-near.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt=""></div>
+        <div class="story">
+            <div class="story-content">
+                <h2>Floral Essence</h2>
+                <h4>Floral Essence captures the harmonious blend of nature's beauty and subtle fragrance. A symphony of delicate blooms dances gracefully, imparting a sense of tranquility to any space. The elegant perfume vial adds a touch of sophistication, infusing the air with a gentle and captivating aroma. This arrangement is a sensory experience, bringing the timeless allure of flowers and fragrance into your surroundings.</h4>
+            </div>
+        </div>
+        <div class="actor">
+            <ul>
+                <li>
+                    <h2>Chanel</h2>
+                    <h4>Chanel S.A.</h4>
+                </li>
+                <li>
+                    <h2>Dior</h2>
+                    <h4>LVMH Moët Hennessy Louis Vuitton SE</h4>
+                </li>
+                <li>
+                    <h2>Armani</h2>
+                    <h4>L'Oreal</h4>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <ul class="scroll-wrap">
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        let lastScrollTop = 0;
+        let inViewEq = 0;
+
+        $(window).scroll(function () {
+            let winTop = $(this).scrollTop();
+            let winMid = $(window).height() / 2 + winTop;
+            let winBot = $(window).height() + winTop;
+
+            $(".scroll-wrap li").each(function () {
+                let liHei = $(this).height();
+                let liOff = $(this).offset();
+                let liTop = liOff.top;
+                let liBot = liTop + liHei;
+
+                if (liBot <= winMid || liTop >= winBot) {
+                    $(this).removeClass("inView");
+                } else if (liTop <= winMid) {
+                    $(this).addClass("inView");
+                }
+
+                inViewEq = $(".inView").index() + 1;
+                console.log(inViewEq);
+
+                $(".movie")
+                    .attr("class", "")
+                    .addClass("movie step-" + inViewEq);
+            });
+
+            if (winTop > lastScrollTop) {
+                // Scrolling down
+            } else {
+                // Scrolling up
+            }
+
+            lastScrollTop = winTop;
+        });
+    </script>
+</body>
+</html>
